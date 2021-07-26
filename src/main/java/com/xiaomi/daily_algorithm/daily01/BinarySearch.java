@@ -1,6 +1,7 @@
 package com.xiaomi.daily_algorithm.daily01;
 
 import static com.xiaomi.daily_algorithm.daily01.SelectSort.copyArray;
+import static com.xiaomi.daily_algorithm.daily01.SelectSort.printResult;
 
 /**
  * @author quanhangbo
@@ -16,7 +17,7 @@ public class BinarySearch {
         int left = 0;
         int right = sortArr.length - 1;
         int mid = 0;
-        while(left < right){
+        /*while(left <= right){
             mid = left + ((right - left) >> 1);
 
             if(sortArr[mid] == num){
@@ -27,7 +28,23 @@ public class BinarySearch {
                 right = mid - 1;
             }
         }
-        return sortArr[mid] == num;
+        return sortArr[mid] == num;*/
+
+        /**
+         * 此写法比上次写的少一次循环，所以得注意最后返回值的问题
+         */
+        while(left < right){
+            mid = left + ((right - left) >> 1);
+            if(sortArr[mid] == num){
+                return true;
+            }else if(sortArr[mid] < num){
+                left = mid + 1;
+            }else {
+                right = mid - 1;
+            }
+            // 注意使用批量数据测试的时候，如果这里写为sortArr[mid]的话，有些测试用例不通过
+        }
+        return sortArr[left] == num;
     }
 
     // 写一个对数器批量测试案例是否正确
@@ -38,7 +55,7 @@ public class BinarySearch {
         arr[0] = (int)(((maxSize + 1) * Math.random()) - (maxSize * Math.random()));
 
         for(int i = 1; i < arr.length; i++){
-            arr[i] = arr[i - 1]++;
+            arr[i] = arr[i - 1] + 1;
         }
         return arr;
     }
@@ -54,8 +71,7 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-        //int[] arr = {1, 2, 3, 4, 5, 6, 7, 8};
-        //System.out.println(isExist(arr, 6));
+
 
         int testTime = 500000;
         int maxSize = 100;
@@ -72,13 +88,19 @@ public class BinarySearch {
 
             // 随机生成随机数
             int randomNum = (int)((maxValue + 1) * Math.random());
-            if(isExist(arr1, num) && findNum(arr2, num)){
-                succeed = false;
+            succeed = (isExist(arr1, randomNum) + "").equals(findNum(arr2, randomNum) + "");
+            if(!succeed){
+                printResult(arr1);
+                System.out.println(isExist(arr1, randomNum));
+                System.out.println(findNum(arr2, randomNum));
+                System.out.println(randomNum);
             }
-            succeed = true;
-
 
         }
         System.out.println(succeed ? "Accept":"Not Accept");
+
+        /*int[] arr = {48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59};
+        System.out.println(isExist(arr, 55));*/
+
     }
 }
