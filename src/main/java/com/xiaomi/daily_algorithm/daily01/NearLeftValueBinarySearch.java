@@ -16,7 +16,7 @@ public class NearLeftValueBinarySearch {
         int index = -1;
         int left = 0;
         int right = arr.length - 1;
-        while(left < right){
+        while(left <= right){
             int mid = left + ((right - left) >> 1);
             if(arr[mid] >= num){
                 index = mid;
