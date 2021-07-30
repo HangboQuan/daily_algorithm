@@ -11,11 +11,10 @@ public class DeleteNumInLinkList {
     public static ReversalLinkList.Node deleteNumLinkList(ReversalLinkList.Node head, int num){
         // 处理头部可能是num的情况
         while(head != null){
-            if(head.value == num){
-                head = head.next;
-            }else{
+            if(head.value != num){
                 break;
             }
+            head = head.next;
         }
         // 剩下的情况就是头部不是num的情况
         ReversalLinkList.Node q = head;
@@ -23,11 +22,10 @@ public class DeleteNumInLinkList {
         while(p != null){
             if(p.value == num){
                 q.next = p.next;
-                p = q.next;
             }else{
                 q = p;
-                p = p.next;
             }
+            p = p.next;
         }
         return head;
     }
