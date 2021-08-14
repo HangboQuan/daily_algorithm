@@ -50,5 +50,6 @@ public class BubbleSort {
         }
         stopWatch.stop();
         System.out.println("耗时：" + stopWatch.getTotalTimeMillis() + "ms");
-        System.out.println(succeed ? "Accept" : "Not Accept");    }
+        System.out.println(succeed ? "Accept" : "Not Accept");
+    }
 }
