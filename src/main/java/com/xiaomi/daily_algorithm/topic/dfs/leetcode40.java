@@ -11,10 +11,6 @@ public class leetcode40 {
         boolean[] b = new boolean[candidates.length];
         Arrays.sort(candidates);
         dfs(candidates, ans, res, 0, b, target);
-        System.out.println(res.size());
-        for (List<Integer> r : res) {
-            System.out.println(r);
-        }
         return res;
 
     }
@@ -24,20 +20,22 @@ public class leetcode40 {
             return ;
         }
         if (target == 0) {
+            for (int v : ans) {
+                System.out.print(v + " ");
+            }
+            System.out.println();
             res.add(new ArrayList<>(ans));
             return ;
         }
         for (int i = step; i < candidates.length; i ++ ) {
-            if (!b[i]) {
-                if (i > step && candidates[i - 1] == candidates[i]) {
-                    continue;
-                }
+
                 ans.add(candidates[i]);
-                b[i] = true;
-                dfs(candidates, ans, res, step + 1, b, target - candidates[i]);
+                dfs(candidates, ans, res, i + 1, b, target - candidates[i]);
                 ans.remove(ans.size() - 1);
-                b[i] = false;
-            }
+                while (i + 1 < candidates.length && candidates[i + 1] == candidates[i]) {
+                    i ++;
+                }
+
         }
     }
 
